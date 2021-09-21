@@ -6,10 +6,7 @@ import com.shubham.springApp.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +37,28 @@ public class CustomerController {
     public String addCustomerRequest(@ModelAttribute("customer") Customer customer){
         customerService.saveCustomer(customer);
         return "redirect:/customer/list";
+    }
+
+    @GetMapping("/showUpdateForm")
+    public String showUpdateCustomerPage(@RequestParam("customerId")int id,Model model){
+        Customer customer;
+        if(id != 0) {
+            customer = customerService.getCustomerById(id);
+            model.addAttribute("customer", customer);
+            return "showUpdateForm";
+        }
+        return "404";
+    }
+
+    @PostMapping("/updateCustomer")
+    public String updateCustomer(@ModelAttribute("customer") Customer customer){
+        if(customer != null){
+            boolean result = customerService.updateCustomer(customer);
+            if(result){
+                return "redirect:/customer/list";
+            }
+            return "404";
+        }
+        return "404";
     }
 }

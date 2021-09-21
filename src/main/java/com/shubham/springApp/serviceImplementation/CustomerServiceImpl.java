@@ -24,6 +24,27 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public boolean saveCustomer(Customer customer) {
-        return customerDAO.saveCustomer(customer);
+        if(customer != null)
+            return customerDAO.saveCustomer(customer);
+        else
+            return false;
+    }
+
+    @Override
+    @Transactional
+    public Customer getCustomerById(int id) {
+        if(id != 0)
+            return customerDAO.getCustomerById(id);
+        else
+            return null;
+    }
+
+    @Override
+    @Transactional
+    public boolean updateCustomer(Customer customer) {
+        if(customer !=null ){
+            return customerDAO.updateCustomer(customer);
+        }
+        return false;
     }
 }
