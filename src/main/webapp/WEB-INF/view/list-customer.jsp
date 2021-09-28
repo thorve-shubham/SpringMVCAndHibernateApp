@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index_css.css">
+        <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/list-customer.js"></script>
     	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     </head>
 <body>
@@ -37,12 +38,15 @@
                         <c:url var="updateCustomerUrl" value="/customer/showUpdateForm">
                             <c:param name="customerId" value="${customer.id}"/>
                         </c:url>
+                        <c:url var="deleteCustomerUrl" value="/customer/delete">
+                            <c:param name="customerId" value="${customer.id}"/>
+                        </c:url>
                         <tr>
                             <td scope="row">${customer.id}</td>
                             <td>${customer.firstName}</td>
                             <td>${customer.lastName}</td>
                             <td>${customer.email}</td>
-                            <td><a href="${updateCustomerUrl}">Edit</a> | Delete</td>
+                            <td><a href="${updateCustomerUrl}">Edit</a> | <a href="${deleteCustomerUrl}" onclick="confirmDelete('${customer.firstName}')">Delete</a></td>
                         </tr>
                     </c:forEach>
                 </table>

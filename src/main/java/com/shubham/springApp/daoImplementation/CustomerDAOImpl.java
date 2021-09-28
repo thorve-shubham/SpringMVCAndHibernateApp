@@ -25,9 +25,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         Query<Customer> query = currentSession.createQuery("from Customer",Customer.class);
         //Executing the query
         List<Customer> customers = query.getResultList();
-        if(customers!=null){
-            return customers;
-        }
+        if(customers!=null) return customers;
         return null;
     }
 
@@ -50,10 +48,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             Session currentSession = sessionFactory.getCurrentSession();
             //saving customer
             Customer customer = currentSession.get(Customer.class,id);
-            if(customer!=null){
-                return customer;
-            }
-            return null;
+            if(customer!=null) return customer;
         }
         return null;
     }
@@ -68,6 +63,18 @@ public class CustomerDAOImpl implements CustomerDAO {
             return true;
         }
         return false;
+    }
 
+    @Override
+    public boolean deleteCustomer(int id) {
+        if(id != 0){
+            Session currentSession = sessionFactory.getCurrentSession();
+
+            Query query = currentSession.createQuery("delete from Customer where id = :id");
+            query.setParameter("id",id);
+            int result = query.executeUpdate();
+            if(result == 1) return true;
+        }
+        return false;
     }
 }

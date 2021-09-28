@@ -47,4 +47,13 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return false;
     }
+
+    @Override
+    @Transactional
+    public boolean deleteCustomer(int id) {
+        if(id != 0){
+            return customerDAO.deleteCustomer(id);
+        }
+        return false;
+    }
 }

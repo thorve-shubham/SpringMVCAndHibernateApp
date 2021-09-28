@@ -5,8 +5,9 @@ import com.shubham.springApp.entity.Customer;
 import java.util.List;
 
 public interface CustomerService {
-    public List<Customer> getCustomers();
-    public boolean saveCustomer(Customer customer);
-    public Customer getCustomerById(int id);
-    public boolean updateCustomer(Customer customer);
+    List<Customer> getCustomers();
+    boolean saveCustomer(Customer customer);
+    Customer getCustomerById(int id);
+    boolean updateCustomer(Customer customer);
+    boolean deleteCustomer(int id);
 }

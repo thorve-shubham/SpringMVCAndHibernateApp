@@ -61,4 +61,15 @@ public class CustomerController {
         }
         return "404";
     }
+
+    @GetMapping("/delete")
+    public String deleteCustomer(@RequestParam("customerId") int id){
+        if(id != 0){
+            boolean result = customerService.deleteCustomer(id);
+            if(result)
+                return "redirect:/customer/list";
+            return "404";
+        }
+        return "404";
+    }
 }
